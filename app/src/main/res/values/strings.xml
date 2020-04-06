@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">PracaInzynierska</string>
+    <string name="sprawd_pobliskie_obiekty">Sprawdź pobliskie obiekty</string>
+    <string name="muzea">Muzea</string>
+    <string-array name="programming_languages">
+        <item>c++</item>
+        <item>c#</item>
+        <item>java</item>
+        <item>javascript</item>
+        <item>kotlin</item>
+    </string-array>
+    <string-array name="description">
+        <item>Random description</item>
+        <item>Random description</item>
+        <item>Random description</item>
+        <item>Random description</item>
+        <item>Random description</item>
+    </string-array>
+
+</resources>
