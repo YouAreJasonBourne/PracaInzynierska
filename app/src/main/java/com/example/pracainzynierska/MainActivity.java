@@ -24,8 +24,8 @@ public class MainActivity extends AppCompatActivity {
         inflater.inflate(R.menu.main_menu, menu);
         return true;
     }
-    public void museumList(View view) {
-        Intent intent = new Intent(this, MuseumActivity.class);
+    public void placeList(View view) {
+        Intent intent = new Intent(this, PlaceActivity.class);
         startActivity(intent);
     }
 
