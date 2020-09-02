@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<fragment xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:map="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mapAddMarker"
+    android:name="com.google.android.gms.maps.SupportMapFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MapsAddMarkerPlaceActivity">
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/placLatLngSave"
+        android:layout_gravity="center|bottom"
+        android:text="Dodaj Lokalizację"
+        android:padding="10dp"
+        android:onClick="sendLocation"
+        android:alpha="0.8"
+        android:background="@color/quantum_white_100"
+        android:layout_marginTop="20dp"
+        android:paddingRight="10dp"/>
+</fragment>
+

@@ -5,13 +5,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
+    android:layout_height="match_parent"
+    >
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:onClick="addPlace"
+        android:padding="10dp"
         tools:listitem="@layout/fragment_list">
 
     </androidx.recyclerview.widget.RecyclerView>

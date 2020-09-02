@@ -7,8 +7,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.pracainzynierska.AddPlaceActivity;
 import com.example.pracainzynierska.R;
 import com.example.pracainzynierska.data.Place;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -16,14 +18,18 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class PlaceAdapter extends RecyclerView.Adapter<PlaceAdapter.PlaceHolder> {
+    private String pathFile;
+    private AddPlaceActivity addPlaceActivity;
+
+
     class PlaceHolder extends RecyclerView.ViewHolder {
         private final TextView placeName;
-        private final TextView placeDescription;
+        private final TextView distanceToPlace;
         private final ImageView imageUrl;
         private PlaceHolder(@NonNull View itemView) {
             super(itemView);
-            placeName =  itemView.findViewById(R.id.textView2);
-            placeDescription = itemView.findViewById(R.id.textView3);
+            placeName =  itemView.findViewById(R.id.distanceToplace);
+            distanceToPlace = itemView.findViewById(R.id.distanceToplace);
             imageUrl = itemView.findViewById(R.id.imageView2);
 
         }
@@ -47,11 +53,17 @@ public class PlaceAdapter extends RecyclerView.Adapter<PlaceAdapter.PlaceHolder>
 
     @Override
     public void onBindViewHolder(@NonNull PlaceHolder holder, int position) {
-        if(placeItem != null){
+        if(null != placeItem){
             Place current = placeItem.get(position);
             holder.placeName.setText(current.placeName);
-            holder.placeDescription.setText(current.description);
-        }else{
+
+            if(current.imageUrl != null) {
+                Picasso.get().load(current.imageUrl).fit().placeholder(R.drawable.csharp).into(holder.imageUrl);
+            }
+            else{
+                Picasso.get().load(R.drawable.cplus).fit().into(holder.imageUrl);
+            }
+            }else{
             holder.placeName.setText("No Places");
         }
     }

@@ -119,11 +119,11 @@
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:onClick="placeList"
+        android:layout_marginTop="12dp"
+        android:onClick="mapView"
         android:text="Button"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="74dp" />
+        tools:layout_editor_absoluteX="123dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

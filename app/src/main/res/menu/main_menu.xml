@@ -11,6 +11,8 @@
         android:id="@+id/trybnocny"
         android:title="Tryb nocny" />
     <item
-        android:id="@+id/szukaj"
-        android:title="Szukaj" />
+        android:id="@+id/dodaj_miejsce"
+        android:checkable="false"
+        android:enabled="true"
+        android:title="Dodaj miejsce" />
 </menu>

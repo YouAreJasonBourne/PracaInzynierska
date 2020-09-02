@@ -7,6 +7,7 @@ import com.example.pracainzynierska.viewmodels.PlaceViewModelFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -22,8 +23,12 @@ private PlaceViewModel placeViewModel;
 private PlaceViewModelFactory placeViewModelFactory;
 private List<Double> lat;
 private List<Double> lng;
+private List<String> placeType;
+private List<String> placeName;
 private Double[] latArray;
 private Double[] lngArray;
+private String[] placeNameArray;
+private String[] placeTypeArray;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,8 +40,12 @@ private Double[] lngArray;
         placeViewModel = new ViewModelProvider(this,placeViewModelFactory).get(PlaceViewModel.class);
         lat = placeViewModel.getmAllLatitude();
         lng = placeViewModel.getmAllLongitude();
+        placeName = placeViewModel.getmAllPlaceName();
+        placeType = placeViewModel.getmAllPlaceType();
         latArray = lat.toArray(new Double[1000]);
         lngArray = lng.toArray(new Double[1000]);
+        placeNameArray = placeName.toArray(new String[1000]);
+        placeTypeArray = placeType.toArray(new String[1000]);
     }
 
     @Override
@@ -44,17 +53,18 @@ private Double[] lngArray;
         map = googleMap;
         for(int i = 0 ; i < lat.size() ; i++) {
 
-            createMarker(latArray[i],lngArray[i]);
+            createMarker(latArray[i],lngArray[i],placeTypeArray[i],placeNameArray[i]);
         }
-        map.addMarker(new MarkerOptions()
-                .position(new LatLng(10, 10))
-                .title("Hello world"));
     }
-    protected Marker createMarker(double latitude, double longitude) {
+    protected Marker createMarker(double latitude, double longitude,String placeType, String placeName) {
 
         return map.addMarker(new MarkerOptions()
                 .position(new LatLng(latitude, longitude))
-                .anchor(0.5f, 0.5f));
+                .title(placeName)
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA))
+                .snippet(placeType)
+                .anchor(0.5f, 0.5f))
+                ;
 
     }
 }
