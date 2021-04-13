@@ -28,6 +28,7 @@ public class MapsAddMarkerPlaceActivity extends AppCompatActivity implements OnM
     @Override
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
+        map.setMyLocationEnabled(true);
         map.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng point) {
@@ -44,4 +45,5 @@ public class MapsAddMarkerPlaceActivity extends AppCompatActivity implements OnM
         setResult(RESULT_OK, replyIntent);
         finish();
     }
+
 }

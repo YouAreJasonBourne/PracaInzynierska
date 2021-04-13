@@ -5,8 +5,8 @@
     tools:context="com.example.pracainzynierska">
 
     <item
-        android:id="@+id/ustawienia"
-        android:title="Ustawienia" />
+        android:id="@+id/wyszukaj_miejsca_na_mapie"
+        android:title="Wyszukaj miejsca na mapie" />
     <item
         android:id="@+id/trybnocny"
         android:title="Tryb nocny" />

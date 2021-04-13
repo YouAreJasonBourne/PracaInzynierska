@@ -1,5 +1,6 @@
 package com.example.pracainzynierska;
 
+import android.location.Location;
 import android.os.Bundle;
 
 import com.example.pracainzynierska.viewmodels.PlaceViewModel;
@@ -18,17 +19,24 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 public class showPlaceOnMapActivity extends AppCompatActivity implements OnMapReadyCallback {
+
 private GoogleMap map;
 private PlaceViewModel placeViewModel;
 private PlaceViewModelFactory placeViewModelFactory;
+
 private List<Double> lat;
 private List<Double> lng;
+
 private List<String> placeType;
 private List<String> placeName;
+
 private Double[] latArray;
 private Double[] lngArray;
+
 private String[] placeNameArray;
 private String[] placeTypeArray;
+
+private Location currentlocation;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,16 +63,19 @@ private String[] placeTypeArray;
 
             createMarker(latArray[i],lngArray[i],placeTypeArray[i],placeNameArray[i]);
         }
+       map.setMyLocationEnabled(true);
     }
+
     protected Marker createMarker(double latitude, double longitude,String placeType, String placeName) {
 
         return map.addMarker(new MarkerOptions()
                 .position(new LatLng(latitude, longitude))
                 .title(placeName)
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA))
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE))
                 .snippet(placeType)
                 .anchor(0.5f, 0.5f))
                 ;
 
     }
+
 }

@@ -6,12 +6,13 @@
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
+    android:background="@drawable/background">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:clickable="false"
         android:clipChildren="false"
         android:clipToPadding="false"
         android:onClick="addPlace"
@@ -20,7 +21,14 @@
 
     </androidx.recyclerview.widget.RecyclerView>
 
-    `
+    <TextView
+        android:id="@+id/empty_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="NO DATA AVAILABLE"
+        android:visibility="gone" />
+
 
 </FrameLayout>
 

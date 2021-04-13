@@ -11,65 +11,76 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.pracainzynierska.data.Place;
+import com.example.pracainzynierska.viewmodels.PlaceViewModel;
 import com.google.android.gms.maps.GoogleMap;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 public class AddPlaceActivity extends AppCompatActivity {
-    public static final String EXTRA_PLACE_NAME = "com.example.android.placelistsql.PLACENAME";
-    public static final String EXTRA_PLACE_DESCRIPTION = "com.example.android.placelistsql.DESCRIPTION";
-    public static final String EXTRA_PLACE_IMAGE = "com.example.android.placelistsql.PLACEIMAGE";
-    public static final String EXTRA_PLACE_TYPE = "com.example.android.placelistsql.PLACETYPE";
-    public static final String EXTRA_PLACE_LATITUDE = "com.example.android.placelistsql.LATITUDE";
-    public static final String EXTRA_PLACE_LONGTITUDE = "com.example.android.placelistsql.LONGTITUDE";
-    public static final int ADD_PLACE_ACTIVITY_REQUEST_CODE = 1;
+    private  final String PLACE  = "Wszystkie miejsca";
     private EditText mPlaceName;
     private EditText mDescription;
+
     private Button mImageButton;
     private Button mSubmitButton;
-    private Spinner spinner;
-    private GoogleMap mMap;
-    private String path;
+
     private TextView filePath;
     private TextView source;
+
     private double lat;
     private double lng;
+
+    private Spinner spinner;
+
+    private GoogleMap mMap;
+
+    private String path;
+
+    private PlaceViewModel viewModel;
+
+    private Place place;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_place);
         getSupportActionBar().setTitle("Dodaj Obiekt");
 
-        filePath = findViewById(R.id.Source);
         mPlaceName = findViewById(R.id.placeName);
         mDescription = findViewById(R.id.description);
         mImageButton = findViewById(R.id.imageButton);
         mSubmitButton = findViewById(R.id.submitButton);
         spinner = (Spinner) findViewById(R.id.spinner);
+
+        viewModel = new ViewModelProvider(this).get(PlaceViewModel.class);
+
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.place_type, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
+
         mSubmitButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Intent replyIntent = new Intent(AddPlaceActivity.this, PlaceActivity.class);
+                Intent AddPlaceIntent = new Intent(AddPlaceActivity.this, PlaceActivity.class);
+                AddPlaceIntent.putExtra("place",PLACE);
                 if (TextUtils.isEmpty(mPlaceName.getText())) {
-                    setResult(RESULT_CANCELED, replyIntent);
+                    setResult(RESULT_CANCELED, AddPlaceIntent);
                 } else  {
                     String placeName  = mPlaceName.getText().toString();
-                    replyIntent.putExtra(EXTRA_PLACE_NAME, placeName);
                     String placeDescription  = mDescription.getText().toString();
-                    replyIntent.putExtra(EXTRA_PLACE_DESCRIPTION, placeDescription);
-                     String placeType  = spinner.getSelectedItem().toString();
-                    replyIntent.putExtra(EXTRA_PLACE_TYPE, placeType);
+                    String placeType  = spinner.getSelectedItem().toString();
                     String pathFile = path;
-                    replyIntent.putExtra(EXTRA_PLACE_IMAGE, pathFile);
-                    Double longitude = lng;
-                    replyIntent.putExtra(EXTRA_PLACE_LONGTITUDE,longitude);
-                    Double latitude = lat;
-                    replyIntent.putExtra(EXTRA_PLACE_LATITUDE,latitude);
 
-                    startActivity(replyIntent);
+                    Double longitude = lng;
+                    Double latitude = lat;
+
+                    place = new Place(placeName,placeDescription,pathFile,placeType,longitude,latitude);
+
+                    viewModel.insert(place);
+
+                    startActivity(AddPlaceIntent);
                 }
                 finish();
             }
